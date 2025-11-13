@@ -1,0 +1,12 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stock Page</title>
+</head>
+<body>
+    <h1>아나리까나라</h1>
+	
+	<h2>사용자 이름 : ${userName}</h2>
+</body>
+</html>

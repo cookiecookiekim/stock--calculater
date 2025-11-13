@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item key="hasShownOverlayPopupBefore" value="true"/>
+	<section name="java.lang.Class">
+		<item key="replaceBarOpen" value="false"/>
+		<list key="findhistory">
+			<item value="glassfish"/>
+			<item value="jstl"/>
+			<item value="jasper"/>
+			<item value="tag"/>
+			<item value="tomcat"/>
+			<item value="mybatis"/>
+		</list>
+	</section>
+</section>

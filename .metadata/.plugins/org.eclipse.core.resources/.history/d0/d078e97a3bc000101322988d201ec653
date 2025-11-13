@@ -1,0 +1,32 @@
+package com.example.demo.stock.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.example.demo.stock.dao.service.StockService;
+
+@Controller
+@RequestMapping("/api/v1/stock")
+public class StockController {
+	
+	private StockService stockService;
+	
+	@Autowired
+	public StockController (StockService stockService) {
+		this.stockService = stockService;
+	}
+	
+	@GetMapping
+	public String findUserName (Model model) {
+		
+		String result = stockService.findUserName();
+		
+		model.addAttribute("userName" , result);
+		
+		return "stock";
+	}
+
+}

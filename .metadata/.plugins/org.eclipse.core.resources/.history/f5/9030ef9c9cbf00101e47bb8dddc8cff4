@@ -1,0 +1,17 @@
+package com.example.demo.stock.controller;
+
+import org.springframework.stereotype.Controller;
+
+import com.example.demo.stock.dao.service.StockService;
+
+@Controller
+public class StockController {
+	
+	private StockService stockService;
+	q
+	public String asd () {
+		
+		return "bye";
+	}
+
+}

@@ -1,0 +1,23 @@
+package com.example.demo.stock.dao.service;
+
+import org.springframework.stereotype.Service;
+
+import com.example.demo.stock.dao.repository.StockRepository;
+
+@Service
+public class StockService {
+	
+	private StockRepository stockRepository;
+	
+	public StockService (StockRepository stockRepository) {
+		this.stockRepository = stockRepository;
+	}
+	
+	public String findUserName () {
+		
+		String result = stockRepository.findUserName();
+		
+		return result;
+	}
+
+}

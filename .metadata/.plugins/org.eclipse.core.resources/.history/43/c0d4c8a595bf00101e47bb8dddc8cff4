@@ -1,0 +1,5 @@
+package com.example.demo.stock.dao.service;
+
+public class StockService {
+
+}

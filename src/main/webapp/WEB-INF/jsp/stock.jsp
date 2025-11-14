@@ -20,7 +20,12 @@
 		<input type=radio name="mode" value="basic" /><span>기본</span>
 		<input type=radio name="mode" value="decimal" /><span>소수점</span>
 	</div>
-	<!--<h2>사용자 이름 : ${userName}</h2>-->
+
+<!--	
+	forEach 연습
+	<c:forEach var="name" items="${userNameList}">
+	    <li>${name}</li>
+	</c:forEach>-->
 	
 	<div>
 		<span>현재보유 (이미 추가매수를 한 경우는 증권사 수수료로 인해 매입금액이 다소 다를 수 있습니다.)</span>
@@ -34,20 +39,24 @@
 	<div>
 		<span>추가매수 (평단과 금액 입력으로 수량 계산에도 용이합니다.)</span>
 		<div>
-			<input placeholder="평단" /> <span>원</span>			
-			<input placeholder="수량" /> <span>수량</span>
-			<input placeholder="금액" /> <span>원</span>
+			<input id="addPrice" placeholder="평단" /> <span>원</span>			
+			<input id="addQuantity" placeholder="수량" /> <span>수량</span>
+			<input id="addTotal" placeholder="금액" /> <span>원</span>
 		</div>
-	</div>	
+	</div>
 	
 	<div>
 		<span>최종보유</span>
 		<div>
-			<input placeholder="최종평단" /> <span>원</span>			
-			<input placeholder="최종수량" /> <span>수량</span>
-			<input placeholder="최종금액" /> <span>원</span>
+			<input id="finalPrice" placeholder="최종평단" /> <span>원</span>			
+			<input id="finalQuantity" placeholder="최종수량" /> <span>수량</span>
+			<input id="finalTotal" placeholder="최종금액" /> <span>원</span>
 		</div>
 	</div>
+	
+	<script>
+
+	</script>
 	
 	<div>
 	<span>회차</span><span>평단</span><span>수량</span><span>금액</span> <span>초기화</span>
@@ -70,5 +79,35 @@
 	avgPriceInput.addEventListener("input", calculateTotal);
 	quantityInput.addEventListener("input", calculateTotal);
 	
+	////////////////////////////////////////////////////////////////
+	
+	const addPriceInput = document.getElementById("addPrice");
+	const addQuantityInput = document.getElementById("addQuantity");
+	const addTotalInput = document.getElementById("addTotal");
+
+	function cal () {
+		const addPriceValue = Number(addPriceInput.value) || 0;
+		const addQuantityValue = Number(addQuantityInput.value) || 0;
+		
+		addTotalInput.value = Number(addPriceValue * addQuantityValue).toLocaleString() || '';
+
+	}
+	addPriceInput.addEventListener("input", cal);
+	addQuantityInput.addEventListener("input", cal);
+	
+	////////////////////////////////////////////////////////////////
+	
+	const finalPriceInput = document.getElementById("finalPrice");
+	const finalQuantityInput = document.getElementById("finalQuantity");
+	const finalTotalInput = document.getElementById("finalTotal");
+
+	function quantityResult () {
+		const quantity = parseFloat(quantityInput.value) || 0;
+		const addQuantityValue = Number(addQuantityInput.value) || 0;
+		
+		finalQuantityInput.value = quantity + addQuantityValue;
+	}
+	quantityInput.addEventListener("input", quantityResult);
+	addQuantityInput.addEventListener("input", quantityResult);
 </script>
 </html>

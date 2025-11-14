@@ -1,5 +1,7 @@
 package com.example.demo.stock.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,9 +24,9 @@ public class StockController {
 	@GetMapping
 	public String findUserName (Model model) {
 		
-		String result = stockService.findUserName();
+		List<String> result = stockService.findUserName();
 		
-		model.addAttribute("userName" , result);
+		model.addAttribute("userNameList" , result);
 		
 		return "stock";
 	}

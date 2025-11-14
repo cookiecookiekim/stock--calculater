@@ -1,5 +1,7 @@
 package com.example.demo.stock.dao.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +17,9 @@ public class StockService {
 		this.stockRepository = stockRepository;
 	}
 	
-	public String findUserName () {
+	public List<String> findUserName () {
 		
-		String result = stockRepository.findUserName();
+		List<String> result = stockRepository.findUserName();
 		
 		return result;
 	}

@@ -48,15 +48,11 @@
 	<div>
 		<span>최종보유</span>
 		<div>
-			<input id="finalPrice" placeholder="최종평단" /> <span>원</span>			
-			<input id="finalQuantity" placeholder="최종수량" /> <span>수량</span>
-			<input id="finalTotal" placeholder="최종금액" /> <span>원</span>
+			<input id="finalPrice" placeholder="최종평단" readonly/> <span>원</span>			
+			<input id="finalQuantity" placeholder="최종수량" readonly/> <span>수량</span>
+			<input id="finalTotal" placeholder="최종금액" readonly/> <span>원</span>
 		</div>
 	</div>
-	
-	<script>
-
-	</script>
 	
 	<div>
 	<span>회차</span><span>평단</span><span>수량</span><span>금액</span> <span>초기화</span>
@@ -68,46 +64,70 @@
 	const quantityInput = document.getElementById("quantity");
 	const totalInput = document.getElementById("total");
 	
-	function calculateTotal(){
-		const avgPrice = parseFloat(avgPriceInput.value) || 0;
-		const quantity = parseFloat(quantityInput.value) || 0;
-		const total = avgPrice * quantity;
-		
-		totalInput.value = total ? total.toLocaleString() : '';
-	}
-	
-	avgPriceInput.addEventListener("input", calculateTotal);
-	quantityInput.addEventListener("input", calculateTotal);
-	
-	////////////////////////////////////////////////////////////////
-	
 	const addPriceInput = document.getElementById("addPrice");
 	const addQuantityInput = document.getElementById("addQuantity");
 	const addTotalInput = document.getElementById("addTotal");
-
-	function cal () {
-		const addPriceValue = Number(addPriceInput.value) || 0;
-		const addQuantityValue = Number(addQuantityInput.value) || 0;
-		
-		addTotalInput.value = Number(addPriceValue * addQuantityValue).toLocaleString() || '';
-
-	}
-	addPriceInput.addEventListener("input", cal);
-	addQuantityInput.addEventListener("input", cal);
-	
-	////////////////////////////////////////////////////////////////
 	
 	const finalPriceInput = document.getElementById("finalPrice");
 	const finalQuantityInput = document.getElementById("finalQuantity");
 	const finalTotalInput = document.getElementById("finalTotal");
-
-	function quantityResult () {
-		const quantity = parseFloat(quantityInput.value) || 0;
-		const addQuantityValue = Number(addQuantityInput.value) || 0;
-		
-		finalQuantityInput.value = quantity + addQuantityValue;
+	
+	function parseNumber(value){
+		return Number(String(value).replace(/,/g, '')) || 0;
 	}
-	quantityInput.addEventListener("input", quantityResult);
-	addQuantityInput.addEventListener("input", quantityResult);
+	
+	function allCalculate(){
+		// 현재 보유
+		const avgPriceValue = parseNumber(avgPriceInput.value);
+		const quantityInputValue = parseNumber(quantityInput.value);
+		const totalValue = avgPriceValue * quantityInputValue;
+		
+		totalInput.value = totalValue ? totalValue.toLocaleString() : '';
+		
+		// 추가 매수
+		const addPriceValue = parseNumber(addPriceInput.value);
+		const addQuantityValue = parseNumber(addQuantityInput.value);
+		const addTotalValue = addPriceValue * addQuantityValue;
+		
+		addTotalInput.value = addTotalValue ? addTotalValue.toLocaleString() : '';
+		
+		const finalPriceValue = finalPriceInput.value;
+		
+		// 최종 수량
+		finalQuantityInput.value = quantityInputValue + addQuantityValue;
+		
+		// 최종 금액
+		const finalTotalValue = totalValue + addTotalValue;
+		finalTotalInput.value = finalTotalValue ? finalTotalValue.toLocaleString() : '';
+		
+		finalCalculate();
+	}
+	
+	// 최종 평단
+	function finalCalculate(){
+		const finalTotalValue  = parseNumber(finalTotalInput.value);
+		const finalQuantityValue  = parseNumber(finalQuantityInput.value);
+
+		if(finalQuantityValue === 0) {
+			finalPriceInput.value = '';
+			return;
+		}
+		
+		const result = finalTotalValue / finalQuantityValue;
+		
+		const rounded = Math.round(result);
+		
+		finalPriceInput.value = rounded.toLocaleString();
+		
+	}
+	
+	avgPriceInput.addEventListener("input" , allCalculate);
+	quantityInput.addEventListener("input" , allCalculate);
+	addPriceInput.addEventListener("input" , allCalculate);
+	addQuantityInput.addEventListener("input" , allCalculate);
+
+	// 페이지 로드되면 계산 한 번!
+	allCalculate();
 </script>
+
 </html>

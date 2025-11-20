@@ -6,6 +6,7 @@
 <html>
 <head>
     <title>Stock Page</title>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
     <h1>주식 코인 물타기 계산기</h1>
@@ -27,7 +28,7 @@
 	    <li>${name}</li>
 	</c:forEach>-->
 	
-	<div>
+	<div class="currentDiv">
 		<span>현재보유 (이미 추가매수를 한 경우는 증권사 수수료로 인해 매입금액이 다소 다를 수 있습니다.)</span>
 		<div>
 			<input id="avgPrice" placeholder="보유평단" /> <span>원</span>			
@@ -36,7 +37,7 @@
 		</div>
 	</div>
 
-	<div>
+	<div class="addDiv">
 		<span>추가매수 (평단과 금액 입력으로 수량 계산에도 용이합니다.)</span>
 		<div>
 			<input id="addPrice" placeholder="평단" /> <span>원</span>			
@@ -45,8 +46,8 @@
 		</div>
 	</div>
 	
-	<div>
-		<span>최종보유</span>
+	<div class="finalDiv">
+		<div class="header-row"><span>최종보유</span> <span class="right">↑ 현재 보유로</span></div>
 		<div>
 			<input id="finalPrice" placeholder="최종평단" readonly/> <span>원</span>			
 			<input id="finalQuantity" placeholder="최종수량" readonly/> <span>수량</span>
